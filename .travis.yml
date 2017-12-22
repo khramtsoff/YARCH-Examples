@@ -1,8 +1,7 @@
-language: objective-c
+language: swift
 osx_image: xcode9.2
 xcode_workspace: YARCH.xcworkspace
-xcode_scheme: YARCHTests
+xcode_scheme: YARCH
 xcode_sdk: iphonesimulator11.2
-branches:
-  only:
-    - master
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
