@@ -76,14 +76,12 @@ class UITableViewMock: UITableView {
 
     var dequeueReusableCellDidCalled = 0
     var dequeueReusableCellArguments: (identifier: String?, indexPath: IndexPath?) = (nil, nil)
-    var dequeueReusableCellStub: UITableViewCell?
 
     var registerHeaderFooterDidCalled = 0
     var registerHeaderFooterArguments: (viewClass: AnyClass?, identifier: String?) = (nil, nil)
 
     var dequeueReusableHeaderFooterDidCalled = 0
     var dequeueReusableHeaderFooterArguments: String?
-    var dequeueReusableHeaderFooterStub: UITableViewHeaderFooterView?
 
     init() {
         super.init(frame: .zero, style: .plain)
@@ -94,6 +92,7 @@ class UITableViewMock: UITableView {
     }
 
     override func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+        super.register(cellClass, forCellReuseIdentifier: identifier)
         registerCellDidCalled += 1
         registerCellIdentifierArguments = (cellClass, identifier)
     }
@@ -101,10 +100,11 @@ class UITableViewMock: UITableView {
     override func dequeueReusableCell(withIdentifier identifier: String, for indexPath: IndexPath) -> UITableViewCell {
         dequeueReusableCellDidCalled += 1
         dequeueReusableCellArguments = (identifier, indexPath)
-        return dequeueReusableCellStub ?? UITableViewCell()
+        return super.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     }
 
     override func register(_ aClass: AnyClass?, forHeaderFooterViewReuseIdentifier identifier: String) {
+        super.register(aClass, forHeaderFooterViewReuseIdentifier: identifier)
         registerHeaderFooterDidCalled += 1
         registerHeaderFooterArguments = (aClass, identifier)
     }
@@ -112,7 +112,7 @@ class UITableViewMock: UITableView {
     override func dequeueReusableHeaderFooterView(withIdentifier identifier: String) -> UITableViewHeaderFooterView? {
         dequeueReusableHeaderFooterDidCalled += 1
         dequeueReusableHeaderFooterArguments = identifier
-        return dequeueReusableHeaderFooterStub
+        return super.dequeueReusableHeaderFooterView(withIdentifier: identifier)
     }
 
 }

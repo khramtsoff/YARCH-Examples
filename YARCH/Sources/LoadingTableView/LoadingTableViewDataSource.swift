@@ -24,7 +24,6 @@ class LoadingTableViewDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: String(describing: LoadingTableViewCell.self))
-        return tableView.dequeueReusableCell(withIdentifier: String(describing: LoadingTableViewCell.self), for: indexPath)
+        return tableView.dequeueReusableCellWithRegistration(type: LoadingTableViewCell.self, indexPath: indexPath)
     }
 }

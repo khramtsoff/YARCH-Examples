@@ -36,7 +36,7 @@ class LoadingTableViewDelegateTests: QuickSpec {
                 _ = delegate.tableView(tableView, viewForHeaderInSection: 0)
 
                 //then
-                expect(tableView.dequeueReusableHeaderFooterDidCalled).to(equal(1))
+                expect(tableView.dequeueReusableHeaderFooterDidCalled).to(equal(2))
                 expect(tableView.dequeueReusableHeaderFooterArguments).to(equal(expectedHeaderIdentifier))
             }
         }
